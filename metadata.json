@@ -1,0 +1,6 @@
+{
+  "name": "Shavi Agency",
+  "description": "منظومة تشغيل الأعمال المتكاملة لشركة Shavi Agency - حلول تسويقية ذكية، أتمتة الأنظمة بالذكاء الاصطناعي، وتطوير الأعمال.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

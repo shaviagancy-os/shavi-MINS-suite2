@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Bordeaux';
+  src: url('/fonts/bordeaux.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* Global + display + English text now use a clean Vodafone-like sans (Montserrat).
+     Bordeaux is reserved EXCLUSIVELY for the 'Shavi' / 'Shavi OS' brand word (see --font-bordeaux + .brand-word). */
+  --font-sans: 'Montserrat', 'IBM Plex Sans Arabic', 'Tajawal', system-ui, sans-serif;
+  --font-display: 'Montserrat', 'Tajawal', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-en: 'Montserrat', 'Inter', system-ui, sans-serif;
+  --font-bordeaux: 'Bordeaux', 'Playfair Display', 'Cinzel', serif;
+  
+  --color-accent-red: #952525;
+  --color-accent-red-hover: #7A1E1E;
+  --color-accent-light: rgba(149, 37, 37, 0.04);
+  --color-accent-light-hover: rgba(149, 37, 37, 0.08);
+
+  /* Brand override: map Tailwind's default red palette to official Shavi maroon
+     so legacy `red-*` utilities render on-brand without touching components. */
+  --color-red-100: #F3E7E7;
+  --color-red-400: #B23A3A;
+  --color-red-500: #952525;
+  --color-red-600: #7A1E1E;
+  
+  --color-text-primary: #030712;
+  --color-text-secondary: #4b5563;
+  --color-text-tertiary: #9ca3af;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin-slow: spin 12s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: #ffffff;
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Selection styling */
+  ::selection {
+    background-color: rgba(149, 37, 37, 0.1);
+    color: #952525;
+  }
+}
+
+/* Glassmorphism custom components */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.glass-panel-dark {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card-premium {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-premium:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(149, 37, 37, 0.15);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(149, 37, 37, 0.02);
+  transform: translateY(-4px);
+}
+
+/* Premium gradient grids and backgrounds */
+.gradient-bg-grid {
+  background-image: 
+    radial-gradient(circle at 100% 0%, rgba(149, 37, 37, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 0% 100%, rgba(149, 37, 37, 0.02) 0%, transparent 40%),
+    linear-gradient(to bottom, #ffffff, #fcfcfc, #f9fafb);
+}
+
+/* Hide scrollbars but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom interactive inputs styling */
+.premium-input {
+  background: rgba(249, 250, 251, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease-in-out;
+}
+
+.premium-input:focus {
+  background: #ffffff;
+  border-color: #952525;
+  box-shadow: 0 0 0 4px rgba(149, 37, 37, 0.05);
+  outline: none;
+}
+
+/* Chat-specific Custom Styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.01);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(149, 37, 37, 0.3);
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Unified brand wordmark font: Bordeaux (normal weight) so the English
+   "Shavi" word always matches the official wordmark regardless of parent weight. */
+.brand-word {
+  font-family: 'Bordeaux', 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
